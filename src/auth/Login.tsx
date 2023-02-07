@@ -1,14 +1,17 @@
 import React, {useState, useEffect, useRef} from "react";
 import {Box, Button} from '@mui/material';
 import CustomInput from './shared/CustomInput'
+import { AppDispatch } from "../store/store";
+import {connect} from 'react-redux';
 import * as customInterface from '../interface/customInterface'
 import * as api from '../api'
+import { getActions } from "../store/actions/authAction";
 
 
 const Login: React.FC = ()  =>{
     const [email,setEmail] = useState('')
     const [password,setPass] = useState('')
-    
+
     const emailHandle = (event: React.ChangeEvent<HTMLInputElement>) =>{
         setEmail(event.target.value as string)
     }
@@ -21,8 +24,11 @@ const Login: React.FC = ()  =>{
             username : '',
             password : password
         }
-        // console.log(await api.login(loginInfo))
-        alert (email + password)
+        const userDetails = await api.login(loginInfo)
+        // if(userDetails){
+        //     localStorage.setItem(`token`, userDetails.token || '')
+        //     localStorage.setItem(`username`, userDetails.username || '')
+        // }
     }
     return (
         <>
@@ -36,5 +42,10 @@ const Login: React.FC = ()  =>{
     )
 }
 
+const mapActionsToProps = (dispatch : AppDispatch) =>{
+    return {
+      ...getActions(dispatch).login
+    }
+}
 
-export default Login
+export default connect(null, mapActionsToProps) (Login)

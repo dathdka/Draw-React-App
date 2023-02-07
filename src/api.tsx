@@ -1,5 +1,6 @@
-import axios from "axios";
+import axios, { Axios, AxiosResponse } from "axios";
 import * as customInterface from './interface/customInterface'
+import { ServerResponse } from "http";
 const api = axios.create({
     baseURL: 'http://localhost:1234',
     timeout: 30000
@@ -19,12 +20,12 @@ api.interceptors.request.use(
     }
   );
 
-  export const login = async (data : customInterface.account) =>{
+  export const login = async (data : customInterface.account)  =>{
     try{
-        return await api.post('/login', data)
+        const response : AxiosResponse = await api.post('/login', data) 
+        return response
     }catch(err){
-        console.error(err);
-        return
+        alert(err)
     }
   }
 
@@ -37,9 +38,9 @@ api.interceptors.request.use(
     }
   }
 
-  export const logout = async (data : customInterface.token ) =>{
+  export const logout = async () =>{
     try{
-        return await api.post('/logout', data)
+        return await api.get('/logout')
     }catch (err){
         console.error(err);
         return
