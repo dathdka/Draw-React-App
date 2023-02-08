@@ -1,16 +1,20 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, {useState} from "react";
 import {Box, Button} from '@mui/material';
 import CustomInput from './shared/CustomInput'
-import { AppDispatch } from "../store/store";
-import {connect} from 'react-redux';
 import * as customInterface from '../interface/customInterface'
-import * as api from '../api'
-import { getActions } from "../store/actions/authAction";
-
-
+import { useDispatch, useSelector} from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { authAction } from "../store";
+import { RootState } from "../store/reducers/combineReducers";
+import { bindActionCreators } from 'redux';
 const Login: React.FC = ()  =>{
     const [email,setEmail] = useState('')
     const [password,setPass] = useState('')
+
+    const state = useSelector((state: RootState)=> state.auth)
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const {login} = bindActionCreators(authAction, dispatch)
 
     const emailHandle = (event: React.ChangeEvent<HTMLInputElement>) =>{
         setEmail(event.target.value as string)
@@ -18,17 +22,13 @@ const Login: React.FC = ()  =>{
     const passwordHandle = (event: React.ChangeEvent<HTMLInputElement>) =>{
         setPass(event.target.value as string)
     }
-    const loginHanle = async() =>{
+    const LoginHanle = async() =>{
         const loginInfo : customInterface.account = {
             email : email,
             username : '',
             password : password
         }
-        const userDetails = await api.login(loginInfo)
-        // if(userDetails){
-        //     localStorage.setItem(`token`, userDetails.token || '')
-        //     localStorage.setItem(`username`, userDetails.username || '')
-        // }
+        login(loginInfo,navigate)
     }
     return (
         <>
@@ -36,16 +36,12 @@ const Login: React.FC = ()  =>{
             <Box >
                 <CustomInput text="username" handler={emailHandle}/>
                 <CustomInput text="password" handler={passwordHandle}/>
-                <Button variant="contained" onClick={loginHanle}>Login</Button>
+                <Button variant="contained" onClick={LoginHanle}>Login</Button>
             </Box>
         </>
     )
 }
 
-const mapActionsToProps = (dispatch : AppDispatch) =>{
-    return {
-      ...getActions(dispatch).login
-    }
-}
 
-export default connect(null, mapActionsToProps) (Login)
+
+export default Login

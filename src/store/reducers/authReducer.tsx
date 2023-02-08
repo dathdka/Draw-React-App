@@ -1,20 +1,15 @@
-import { authActions } from "../actions/authAction";
+import { authActionInterface } from "../action-interface/authActionInterface";
+import { authActionType } from "../action-type/authActionType";
 
-interface action {
-    type: string,
-    payload? : string
-}
-const userdetails = ''
+const initState = { userDetails: null };
 
-const reducer = (state: string = userdetails, action : action) =>{
-    switch(action.type){
-        case "SET_USER_DETAILS":
-            return {state ,
-                    userdetails : action.payload}
-        case "REMOVE_USER_DETAILS":
-            return {state ,
-                    userdetails : ''}
-        default:
-            return state;
-    }
-}
+export const reducer = (state = initState, action: authActionInterface) => {
+  switch (action.type) {
+    case authActionType.LOGIN:
+      return { ...state, userDetails: action.payload };
+    case authActionType.LOGOUT:
+      return { ...state, userDetail: "" };
+    default:
+      return state;
+  }
+};
