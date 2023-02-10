@@ -5,6 +5,8 @@ import { authActionType } from "../action-type/authActionType";
 import { authActionInterface } from "../action-interface/authActionInterface";
 import * as api from "../../api";
 
+
+
 export const login = (
   userDetails: customInterface.account,
   navigate: NavigateFunction
@@ -57,6 +59,7 @@ export const logout = (navigate : NavigateFunction) =>{
     localStorage.removeItem(`id`)
     localStorage.removeItem(`token`)
     localStorage.removeItem(`username`)
+    navigate("/login")
     dispatch({
       type : authActionType.LOGOUT
     })

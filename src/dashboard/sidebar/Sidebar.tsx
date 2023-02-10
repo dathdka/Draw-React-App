@@ -1,4 +1,5 @@
-import React, { ChangeEventHandler } from 'react'
+import React, { ChangeEventHandler, useEffect, useState } from 'react'
+import { Logout } from '../../shared/Logout';
 import { styled } from "@mui/system";
 import { Button } from '@mui/material';
 import * as api from '../../api'
@@ -12,8 +13,14 @@ const Container = styled('div')({
 })
 
 const Sidebar : React.FC = () =>{
+    const [logout, setLogout] = useState(false);
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (!token) setLogout(true);
+    }, []);
+
     const logoutHandle = async () =>{
-        await api.logout();
+        setLogout(true)
     }
 
     const explore = async () =>{
@@ -25,6 +32,7 @@ const Sidebar : React.FC = () =>{
     }
     return(
         <Container>
+            {logout && <Logout />}
             <Button style={{padding: 20}} onClick={logoutHandle}>
                 <LogoutIcon />
             </Button>

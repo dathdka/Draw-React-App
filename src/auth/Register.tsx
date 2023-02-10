@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import CustomIntput from './shared/CustomInput'
+import CustomIntput from '../shared/CustomInput'
 import {Box, Button} from '@mui/material';
 import * as customInterface from '../interface/customInterface'
 import { RootState } from '../store/reducers/combineReducers';

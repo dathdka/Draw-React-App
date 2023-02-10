@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Box, Button} from '@mui/material';
-import CustomInput from './shared/CustomInput'
+import CustomInput from '../shared/CustomInput'
 import * as customInterface from '../interface/customInterface'
 import { useDispatch, useSelector} from "react-redux";
 import { useNavigate } from "react-router-dom";

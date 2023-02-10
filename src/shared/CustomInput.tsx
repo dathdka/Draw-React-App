@@ -1,7 +1,7 @@
 import React from 'react'
 import { TextField } from "@mui/material";
 import { styled } from "@mui/system";
-import * as customInterface from '../../interface/customInterface'
+import * as customInterface from '../interface/customInterface'
 const CustomField = styled(TextField)({
     padding : 20
 })

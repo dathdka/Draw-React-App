@@ -1,6 +1,5 @@
-import axios, { Axios, AxiosError, AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 import * as customInterface from "./interface/customInterface";
-import { ServerResponse } from "http";
 const api = axios.create({
   baseURL: "http://localhost:1234",
   timeout: 30000,
