@@ -40,9 +40,24 @@ export const logout = async () => {
   try {
      await api.get("/logout");
      alert('logout success')
-    return
-  } catch (err) {
-    console.error(err);
     return;
+  } catch (err : any) {
+    alert(err["response"]["data"]);
   }
 };
+
+export const createNewBoard = async(boardName : string) =>{
+  try {
+    return await api.post('create-new-board',{boardName})
+  } catch (err : any) {
+    alert(err["response"]["data"]);
+  }
+}
+
+export const explore = async()=>{
+  try {
+    return await api.get('explore')
+  } catch (err: any) {
+    alert(err["response"]["data"]);
+  }
+}

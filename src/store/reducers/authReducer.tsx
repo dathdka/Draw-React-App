@@ -8,7 +8,7 @@ export const reducer = (state = initState, action: authActionInterface) => {
     case authActionType.LOGIN:
       return { ...state, userDetails: action.payload };
     case authActionType.LOGOUT:
-      return { ...state, userDetail: "" };
+      return { ...state, userDetails: "" };
     default:
       return state;
   }

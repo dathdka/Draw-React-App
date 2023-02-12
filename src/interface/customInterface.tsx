@@ -1,3 +1,5 @@
 export * from './account'
 export * from './authProps'
 export * from './error'
+export * from './board'
+export * from './reducerInterface/drawReducer'

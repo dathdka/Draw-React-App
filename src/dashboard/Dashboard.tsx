@@ -2,8 +2,6 @@ import React, { useEffect } from "react";
 import Sidebar from "./sidebar/Sidebar";
 import Home from "./home/Home";
 import { connectWithServer } from "../socket";
-import * as customInterface from "../interface/customInterface";
-import { useState } from "react";
 const Dashboard: React.FC = () => {
 
   useEffect(() => {
