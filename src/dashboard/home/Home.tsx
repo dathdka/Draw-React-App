@@ -1,9 +1,13 @@
 import { styled } from "@mui/system";
 import { connect } from "react-redux";
 import { useEffect} from 'react'
+import Board from "./board/Board";
 import * as customInterface from '../../interface/customInterface'
 const HomeContainer = styled('div')({
     backgroundColor : '#123245',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     height : '100vh',
     width : '100%'
 })
@@ -15,10 +19,10 @@ const Home : React.FC<customInterface.board > = ({id,name,data}) =>{
         console.log(name)
     },[id])
     
-
+            
     return (
         <HomeContainer>
-
+            {id && <Board/>}
         </HomeContainer>
     )
 }
