@@ -5,7 +5,9 @@ import { Button } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ImageSearchIcon from '@mui/icons-material/ImageSearch';
 import FolderSharedIcon from '@mui/icons-material/FolderShared';
+import KitesurfingIcon from '@mui/icons-material/Kitesurfing';
 import AddIcon from '@mui/icons-material/Add';
+import * as socketHandle from '../../socket'
 import { drawAction } from '../../store';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/reducers/combineReducers';
@@ -50,6 +52,10 @@ const Sidebar : React.FC = () =>{
         createNewBoard(boardName)
     }
 
+    const test = () =>{
+        socketHandle.acceptInvitation()
+    }
+
     return(
         <Container>
             {logout && <Logout />}
@@ -62,10 +68,14 @@ const Sidebar : React.FC = () =>{
             <CustomButton onClick={myCollection}>
                 <FolderSharedIcon />
             </CustomButton>
-            {showCollection && 
+            {showCollection && <>
             <CustomButton onClick={createBoard}>
                 <AddIcon/>
             </CustomButton>
+            <CustomButton onClick={test}>
+                <KitesurfingIcon/>
+            </CustomButton>
+            </>
             }
         </Container>
     )
